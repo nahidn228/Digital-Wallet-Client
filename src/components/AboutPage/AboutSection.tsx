@@ -178,7 +178,7 @@ const AboutSection = ({
           <div className="mt-10 flex flex-wrap justify-between gap-10 text-center">
             {achievements.map((item, idx) => (
               <div className="flex flex-col gap-4" key={item.label + idx}>
-                <p className="text-primary/70 font-medium">{item.label}</p>
+                <p className="text-primary/90 font-medium">{item.label}</p>
                 <span className="text-4xl font-semibold md:text-5xl">
                   {item.value}
                 </span>

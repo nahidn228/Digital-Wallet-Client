@@ -20,7 +20,7 @@ interface Team1Props {
 }
 
 const TeamSection = ({
-  heading = "Meet Our Team",
+  heading = "Meet Our",
   description = "A passionate group of innovators combining skills in technology, strategy, and creativity to build solutions that truly make an impact.",
   members = [
     {
@@ -90,7 +90,7 @@ const TeamSection = ({
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="mb-6 text-3xl font-bold  lg:text-5xl">
-            {heading}
+            {heading} <span className="text-primary">Team</span>
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg leading-relaxed">
             {description}
