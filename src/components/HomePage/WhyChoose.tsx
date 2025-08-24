@@ -10,7 +10,7 @@ const WhyChoose = () => {
         <h2 className="text-3xl font-medium lg:text-4xl text-center">Why Choose Us?</h2>
         <div className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-3">
           <div className="rounded-lg bg-accent p-5">
-            <span className="mb-8 flex size-12 items-center justify-center rounded-full bg-background">
+            <span className="mb-8 flex size-12 items-center justify-center rounded-full bg-background border border-primary">
               <Timer className="size-6" />
             </span>
             <h3 className="mb-2 text-xl font-medium">Performance</h3>
@@ -19,7 +19,7 @@ const WhyChoose = () => {
             </p>
           </div>
           <div className="rounded-lg bg-accent p-5">
-            <span className="mb-8 flex size-12 items-center justify-center rounded-full bg-background">
+            <span className="mb-8 flex size-12 items-center justify-center rounded-full bg-background border border-primary">
               <ZoomIn className="size-6" />
             </span>
             <h3 className="mb-2 text-xl font-medium">Quality</h3>
@@ -28,8 +28,8 @@ const WhyChoose = () => {
             </p>
           </div>
           <div className="rounded-lg bg-accent p-5">
-            <span className="mb-8 flex size-12 items-center justify-center rounded-full bg-background">
-              <Zap className="size-6" />
+            <span className="mb-8 flex size-12 items-center justify-center rounded-full bg-background border border-primary">
+              <Zap className="size-6 " />
             </span>
             <h3 className="mb-2 text-xl font-medium">Innovation</h3>
             <p className="leading-7 text-muted-foreground">

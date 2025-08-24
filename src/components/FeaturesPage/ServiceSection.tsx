@@ -71,7 +71,7 @@ const ServiceSection = () => {
                   <div className="bg-muted rounded-full p-3">
                     {service.icon}
                   </div>
-                  <h3 className="text-xl font-semibold">{service.title}</h3>
+                  <h3 className="text-xl font-semibold text-primary">{service.title}</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
                   {service.description}

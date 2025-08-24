@@ -72,7 +72,7 @@ const FeaturesSection = () => {
               className="flex flex-col justify-between rounded-lg bg-accent p-6 md:min-h-[300px] md:p-8"
               key={idx}
             >
-              <span className="mb-6 flex size-11 items-center justify-center rounded-full bg-background">
+              <span className="mb-6 flex size-11 items-center justify-center rounded-full bg-background border border-b-primary">
                 {feature.icon}
               </span>
               <div>

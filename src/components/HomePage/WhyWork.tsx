@@ -67,10 +67,10 @@ const WhyWork = ({
             <span className="text-primary font-semibold">D.WALLET</span> ?
           </h2>
         </div>
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-10  mx-auto md:grid-cols-2 lg:grid-cols-3">
           {reasons.map((reason, i) => (
             <div key={i} className="flex flex-col">
-              <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-accent">
+              <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-accent border border-b-primary">
                 {reason.icon}
               </div>
               <h3 className="mb-2 text-xl font-semibold">{reason.title}</h3>

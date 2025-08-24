@@ -1,7 +1,12 @@
+import PriceHero from "@/components/PricingPage/PriceHero";
+import PricingCard from "@/components/PricingPage/PricingCard";
+
+
 const Pricing = () => {
   return (
     <div>
-      <h1>This is Pricing component</h1>
+      <PriceHero />
+      <PricingCard />
     </div>
   );
 };
