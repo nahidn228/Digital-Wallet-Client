@@ -1,7 +1,7 @@
 import App from "@/App";
-import AdminLayout from "@/components/layout/AdminLayout";
+
 import About from "@/pages/About";
-import Analytics from "@/pages/Admin/Analytics";
+
 import { createBrowserRouter } from "react-router";
 
 const router = createBrowserRouter([
@@ -15,16 +15,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    Component: AdminLayout,
-    path: "/admin",
-    children: [
-      {
-        Component: Analytics,
-        path: "analytics",
-      },
-    ],
-  },
+  
 ]);
 
 export default router;
