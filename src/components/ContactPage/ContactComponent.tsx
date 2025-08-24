@@ -1,5 +1,5 @@
-
-
+import { useState } from "react";
+import emailjs from "emailjs-com";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,12 @@ interface Contact2Props {
   web?: { label: string; url: string };
 }
 
+const EMAILJS_CONFIG = {
+  SERVICE_ID: import.meta.env.VITE_PUBLIC_EMAILJS_SERVICE_ID || "",
+  TEMPLATE_ID: import.meta.env.VITE_PUBLIC_EMAILJS_TEMPLATE_ID || "",
+  USER_ID: import.meta.env.VITE_PUBLIC_EMAILJS_USER_ID || "",
+};
+
 const ContactComponent = ({
   title = "Contact Us",
   description = "We are available for questions, feedback, or collaboration opportunities. Let us know how we can help!",
@@ -20,6 +26,71 @@ const ContactComponent = ({
   email = "email@example.com",
   web = { label: "shadcnblocks.com", url: "https://shadcnblocks.com" },
 }: Contact2Props) => {
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSubmitStatus("idle");
+
+    try {
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          from_name: `${formData.firstname} ${formData.lastname}`,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: email,
+        },
+        EMAILJS_CONFIG.USER_ID
+      );
+
+      setSubmitStatus("success");
+      // Reset form
+      setFormData({
+        firstname: "",
+        lastname: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+
+      // Clear success message after 3 seconds
+      setTimeout(() => setSubmitStatus("idle"), 3000);
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      setSubmitStatus("error");
+
+      // Clear error message after 3 seconds
+      setTimeout(() => setSubmitStatus("idle"), 3000);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section className="py-32">
       <div className="container">
@@ -55,31 +126,84 @@ const ContactComponent = ({
               </ul>
             </div>
           </div>
-          <div className="mx-auto flex max-w-3xl flex-col gap-6 rounded-lg border p-10">
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto flex max-w-3xl flex-col gap-6 rounded-lg border p-10"
+          >
             <div className="flex gap-4">
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="firstname">First Name</Label>
-                <Input type="text" id="firstname" placeholder="First Name" />
+                <Input
+                  type="text"
+                  id="firstname"
+                  placeholder="First Name"
+                  value={formData.firstname}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="lastname">Last Name</Label>
-                <Input type="text" id="lastname" placeholder="Last Name" />
+                <Input
+                  type="text"
+                  id="lastname"
+                  placeholder="Last Name"
+                  value={formData.lastname}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
             </div>
             <div className="grid w-full items-center gap-1.5">
               <Label htmlFor="email">Email</Label>
-              <Input type="email" id="email" placeholder="Email" />
+              <Input
+                type="email"
+                id="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
             </div>
             <div className="grid w-full items-center gap-1.5">
               <Label htmlFor="subject">Subject</Label>
-              <Input type="text" id="subject" placeholder="Subject" />
+              <Input
+                type="text"
+                id="subject"
+                placeholder="Subject"
+                value={formData.subject}
+                onChange={handleInputChange}
+                required
+              />
             </div>
             <div className="grid w-full gap-1.5">
               <Label htmlFor="message">Message</Label>
-              <Textarea placeholder="Type your message here." id="message" />
+              <Textarea
+                placeholder="Type your message here."
+                id="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+                rows={5}
+              />
             </div>
-            <Button className="w-full">Send Message</Button>
-          </div>
+
+            {/* Status Messages */}
+            {submitStatus === "success" && (
+              <div className="rounded-md bg-green-50 p-4 text-green-800">
+                Message sent successfully! We'll get back to you soon.
+              </div>
+            )}
+            {submitStatus === "error" && (
+              <div className="rounded-md bg-red-50 p-4 text-red-800">
+                Failed to send message. Please try again or contact us directly.
+              </div>
+            )}
+
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Sending..." : "Send Message"}
+            </Button>
+          </form>
         </div>
       </div>
     </section>
