@@ -31,8 +31,8 @@ const Logo = () => {
           fontWeight="bold"
           fontSize="18"
         >
-          <tspan fill="var(--primary)">D.</tspan>
-          <tspan fill="var(--foreground)">Wallet</tspan>
+          <tspan fill="var(--foreground )">D.</tspan>
+          <tspan fill="var(--primary) ">Wallet</tspan>
         </text>
       </svg>
     </div>

@@ -22,12 +22,14 @@ const navigationLinks = [
   { href: "/features", label: "Features" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+  { href: "/faq", label: "FAQ" },
 ];
 
 export default function Navbar() {
   const location = useLocation();
   return (
-    <header className="border-b px-4 md:px-6 bg-white dark:bg-gray-950">
+    <header className="border-b px-4 md:px-6 backdrop-blur-2xl sticky top-0 z-50">
       <div className="flex h-16 justify-between gap-4">
         {/* Left side */}
         <div className="flex gap-2">
@@ -73,7 +75,7 @@ export default function Navbar() {
                           <NavigationMenuLink
                             asChild
                             active={isActive}
-                            className="text-muted-foreground hover:text-primary border-b-primary hover:border-b-primary data-[active]:border-b-primary h-full justify-center rounded-none border-y-2 border-transparent py-1.5 font-medium hover:bg-transparent data-[active]:bg-transparent!"
+                            className="text-foreground hover:text-primary border-b-primary hover:border-b-primary data-[active]:border-b-primary h-full justify-center rounded-none border-y-2 border-transparent py-1.5 font-medium hover:bg-transparent data-[active]:bg-transparent!"
                           >
                             <Link to={link.href}>{link.label}</Link>
                           </NavigationMenuLink>
@@ -87,9 +89,9 @@ export default function Navbar() {
           </div>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a href="#" className="text-primary hover:text-primary/90">
+            <Link to="/" className="text-primary hover:text-primary/90">
               <Logo />
-            </a>
+            </Link>
             {/* Navigation menu */}
             <NavigationMenu className="h-full *:h-full max-md:hidden">
               <NavigationMenuList className="h-full gap-2">
@@ -100,7 +102,7 @@ export default function Navbar() {
                       <NavigationMenuLink
                         asChild
                         active={isActive}
-                        className="text-muted-foreground hover:text-primary border-b-primary hover:border-b-primary data-[active]:border-b-primary h-full justify-center rounded-none border-y-2 border-transparent py-1.5 font-medium hover:bg-transparent data-[active]:bg-transparent!"
+                        className="text-foreground hover:text-primary border-b-primary hover:border-b-primary data-[active]:border-b-primary h-full justify-center rounded-none border-y-2 border-transparent py-1.5 font-medium hover:bg-transparent data-[active]:bg-transparent!"
                       >
                         <Link to={link.href}>{link.label}</Link>
                       </NavigationMenuLink>
@@ -118,11 +120,11 @@ export default function Navbar() {
             {/* User menu */}
             <UserMenu />
           </div>
-          <Button asChild variant="ghost" size="sm" className="text-sm">
+          {/* <Button asChild variant="ghost" size="sm" className="text-sm">
             <Link to={"/login"}>Sign In</Link>
-          </Button>
+          </Button> */}
           <Button asChild size="sm" className="text-sm">
-            <Link to={"/"}>Get Started</Link>
+            <Link to={"/login"}>Sign In</Link>
           </Button>
         </div>
       </div>
