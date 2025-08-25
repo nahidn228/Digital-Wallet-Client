@@ -12,17 +12,43 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Link, useNavigate } from "react-router";
+import { useLoginMutation } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [login] = useLoginMutation();
+
   const navigate = useNavigate();
   const form = useForm();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("Login data:", data);
-    // Handle login logic here
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
+    try {
+      const res = await login(data).unwrap();
+      console.log(res);
+
+      if (res.success) {
+        toast.success("Login Successfully");
+        navigate("/");
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.error(err);
+
+      if (err.data.message === "Password does not match") {
+        toast.error("Invalid Credentials");
+        return;
+      }
+
+      if (err.status === 401) {
+        toast.error("Your account is not verified");
+        navigate("/verify", { state: data.email });
+      }
+    }
   };
 
   return (
