@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 
 interface Contact2Props {
   title?: string;
@@ -34,9 +35,6 @@ const ContactComponent = ({
     message: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -49,9 +47,9 @@ const ContactComponent = ({
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    const toastId = toast.loading("Sending Message ");
     e.preventDefault();
     setIsLoading(true);
-    setSubmitStatus("idle");
 
     try {
       // Send email using EmailJS
@@ -68,7 +66,8 @@ const ContactComponent = ({
         EMAILJS_CONFIG.USER_ID
       );
 
-      setSubmitStatus("success");
+      toast.success("Message sent successfully", { id: toastId });
+
       // Reset form
       setFormData({
         firstname: "",
@@ -77,15 +76,10 @@ const ContactComponent = ({
         subject: "",
         message: "",
       });
-
-      // Clear success message after 3 seconds
-      setTimeout(() => setSubmitStatus("idle"), 3000);
     } catch (error) {
       console.error("Email sending failed:", error);
-      setSubmitStatus("error");
 
-      // Clear error message after 3 seconds
-      setTimeout(() => setSubmitStatus("idle"), 3000);
+      toast.success("Something went wrong", { id: toastId });
     } finally {
       setIsLoading(false);
     }
@@ -189,7 +183,7 @@ const ContactComponent = ({
             </div>
 
             {/* Status Messages */}
-            {submitStatus === "success" && (
+            {/* {submitStatus === "success" && (
               <div className="rounded-md bg-green-50 p-4 text-green-800">
                 Message sent successfully! We'll get back to you soon.
               </div>
@@ -198,7 +192,7 @@ const ContactComponent = ({
               <div className="rounded-md bg-red-50 p-4 text-red-800">
                 Failed to send message. Please try again or contact us directly.
               </div>
-            )}
+            )} */}
 
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? "Sending..." : "Send Message"}
