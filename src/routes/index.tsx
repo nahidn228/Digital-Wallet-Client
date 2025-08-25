@@ -1,6 +1,8 @@
 import App from "@/App";
 
 import About from "@/pages/About";
+import LoginPage from "@/pages/Authentication/LoginPage";
+import RegisterPage from "@/pages/Authentication/Register";
 import Contact from "@/pages/Contact";
 import Faq from "@/pages/Faq";
 import Features from "@/pages/Features";
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         Component: Faq,
         path: "faq",
+      },
+      {
+        Component: LoginPage,
+        path: "/login",
+      },
+      {
+        Component: RegisterPage,
+        path: "/register",
       },
     ],
   },

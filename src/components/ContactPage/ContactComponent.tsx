@@ -23,9 +23,9 @@ const EMAILJS_CONFIG = {
 const ContactComponent = ({
   title = "Contact Us",
   description = "We are available for questions, feedback, or collaboration opportunities. Let us know how we can help!",
-  phone = "(123) 34567890",
-  email = "email@example.com",
-  web = { label: "shadcnblocks.com", url: "https://shadcnblocks.com" },
+  phone = "+880 179832-4439",
+  email = "nahidn228@gmail.com",
+  web = { label: "nahidhasan-portfolio", url: "https://nahidhasan-portfolio.vercel.app/" },
 }: Contact2Props) => {
   const [formData, setFormData] = useState({
     firstname: "",

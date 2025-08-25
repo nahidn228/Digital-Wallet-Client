@@ -288,7 +288,7 @@ const Footer = () => {
 
                     <span className="flex-1 text-gray-700 dark:text-gray-300">
                       {" "}
-                      john@doe.com{" "}
+                      nahidn228@gmail.com{" "}
                     </span>
                   </a>
                 </li>
@@ -314,7 +314,7 @@ const Footer = () => {
                     </svg>
 
                     <span className="flex-1 text-gray-700 dark:text-gray-300">
-                      0123456789
+                      +880 179832-4439
                     </span>
                   </a>
                 </li>
@@ -341,7 +341,7 @@ const Footer = () => {
                   </svg>
 
                   <address className="-mt-0.5 flex-1 text-gray-700 not-italic dark:text-gray-300">
-                    213 Lane, London, United Kingdom
+                    Dhanmondi, Dhaka Bangladesh
                   </address>
                 </li>
               </ul>
