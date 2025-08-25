@@ -69,7 +69,7 @@ const WhyWork = ({
         </div>
         <div className="grid gap-10  mx-auto md:grid-cols-2 lg:grid-cols-3">
           {reasons.map((reason, i) => (
-            <div key={i} className="flex flex-col">
+            <div key={i} className="flex flex-col border-2 rounded-2xl p-4">
               <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-accent border border-b-primary">
                 {reason.icon}
               </div>

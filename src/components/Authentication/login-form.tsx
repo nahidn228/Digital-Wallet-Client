@@ -25,19 +25,20 @@ export function LoginForm({
   const form = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+    const toastId = toast.loading("Please wait...");
     try {
       const res = await login(data).unwrap();
       console.log(res);
 
       if (res.success) {
-        toast.success("Login Successfully");
+        toast.success("Login Successfully", { id: toastId });
         navigate("/");
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error(err);
+      toast.error(err.data.message, { id: toastId });
 
       if (err.data.message === "Password does not match") {
         toast.error("Invalid Credentials");

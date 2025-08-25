@@ -1,10 +1,10 @@
+import FeaturesPageSection from "@/components/FeaturesPage/FeaturesPageSection";
 import ServiceSection from "@/components/FeaturesPage/ServiceSection";
-import FeaturesSection from "@/components/HomePage/FeaturesSection";
 
 const Features = () => {
   return (
     <div>
-      <FeaturesSection />
+      <FeaturesPageSection />
       <ServiceSection />
     </div>
   );

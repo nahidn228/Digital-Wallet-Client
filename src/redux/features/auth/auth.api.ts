@@ -9,6 +9,7 @@ export const authApi = baseApi.injectEndpoints({
         // body: userInfo,
         data: userInfo,
       }),
+      invalidatesTags: ['USER'],
     }),
     logOut: builder.mutation({
       query: () => ({
@@ -25,10 +26,10 @@ export const authApi = baseApi.injectEndpoints({
         data: userInfo,
       }),
     }),
-    
+
     userInfo: builder.query({
       query: () => ({
-        url: "/user/:email",
+        url: "/user/me",
         method: "GET",
       }),
       providesTags: ["USER"],

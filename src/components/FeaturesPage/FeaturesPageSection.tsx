@@ -46,11 +46,11 @@ const feature = [
   },
 ];
 
-const FeaturesSection = () => {
+const FeaturesPageSection = () => {
   return (
     <section className="py-32">
       <div className="container">
-        <div className="flex w-full flex-col items-center">
+        <div className="flex w-full max-w-5xl mx-auto flex-col items-center">
           <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:max-w-3xl md:text-center">
             <h2 className="text-3xl font-medium md:text-5xl">
               Empowering you with safe, simple, and smart{" "}
@@ -64,13 +64,13 @@ const FeaturesSection = () => {
             </p>
           </div>
         </div>
-        <div className="mx-auto mt-20 grid  gap-10 md:grid-cols-2">
+        <div className="max-w-5xl mx-auto mt-20 grid grid-cols-1 gap-8 md:grid-cols-2">
           {feature.map((feature, idx) => (
             <div
               className="flex flex-col justify-between rounded-lg bg-accent p-6 md:min-h-[300px] md:p-8"
               key={idx}
             >
-              <span className="mb-6 flex size-12 items-center justify-center rounded-full bg-background border border-b-primary">
+              <span className="flex size-12 items-center justify-center rounded-full bg-background border border-b-primary">
                 {feature.icon}
               </span>
               <div>
@@ -89,4 +89,4 @@ const FeaturesSection = () => {
   );
 };
 
-export default FeaturesSection;
+export default FeaturesPageSection;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -67,9 +68,9 @@ export function SignUpForm({
       console.log(result);
       toast.success("User created successfully", { id: toastId });
       navigate("/login");
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error(error);
-      toast.error(error.message, { id: toastId });
+      toast.error(error.message , { id: toastId });
     }
   };
 

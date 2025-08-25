@@ -1,18 +1,13 @@
 import {
-  BoltIcon,
   BookOpenIcon,
   Layers2Icon,
+  LogIn,
   LogOutIcon,
-  PinIcon,
   UserPenIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,60 +16,127 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
+import {
+  authApi,
+  useLogOutMutation,
+  useUserInfoQuery,
+} from "@/redux/features/auth/auth.api";
+import { useAppDispatch } from "@/redux/hook";
+import { Link } from "react-router";
 
 export default function UserMenu() {
+  const { data, refetch } = useUserInfoQuery(undefined);
+  const [logout] = useLogOutMutation();
+  const userInfo = data?.data;
+
+  console.log(data);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    logout(undefined);
+    refetch();
+    //reset data when logout
+    dispatch(authApi.util.resetApiState());
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
-          <Avatar>
+          <Avatar className="cursor-pointer border border-primary">
             <AvatarImage src="./avatar.jpg" alt="Profile image" />
-            <AvatarFallback>KK</AvatarFallback>
+            <AvatarFallback className="cursor-pointer ">
+              {" "}
+              {userInfo?.photo ? (
+                <img src={userInfo?.photo} alt="" />
+              ) : (
+                <img
+                  src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp"
+                  alt=""
+                />
+              )}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-64" align="end">
         <DropdownMenuLabel className="flex min-w-0 flex-col">
           <span className="text-foreground truncate text-sm font-medium">
-            Keith Kennedy
+            {userInfo?.name}
           </span>
           <span className="text-muted-foreground truncate text-xs font-normal">
-            k.kennedy@originui.com
+            {userInfo?.email}
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          {/* <DropdownMenuItem>
             <BoltIcon size={16} className="opacity-60" aria-hidden="true" />
             <span>Option 1</span>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem>
-            <Layers2Icon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 2</span>
+            <Link to={"/profile"} className="flex gap-2">
+              <Layers2Icon
+                size={16}
+                className="opacity-60"
+                aria-hidden="true"
+              />
+              Profile
+            </Link>
           </DropdownMenuItem>
+
           <DropdownMenuItem>
-            <BookOpenIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 3</span>
+            <Link to={"/editProfile"} className="flex gap-2">
+              <UserPenIcon
+                size={16}
+                className="opacity-60"
+                aria-hidden="true"
+              />
+              Edit Profile
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          {/* <DropdownMenuItem>
             <PinIcon size={16} className="opacity-60" aria-hidden="true" />
             <span>Option 4</span>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem>
-            <UserPenIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 5</span>
+            <Link to={"/admin/analytics"} className="flex gap-2">
+              <BookOpenIcon
+                size={16}
+                className="opacity-60"
+                aria-hidden="true"
+              />
+              Dashboard
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
-          <span>Logout</span>
+          {data?.data?.email ? (
+            <Button
+              onClick={handleLogout}
+              variant="outline"
+              size="sm"
+              className="text-sm flex items-center gap-2"
+            >
+              <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
+              Logout
+            </Button>
+          ) : (
+            <Button asChild size="sm" className="text-sm">
+              <Link to={"/login"} className="flex items-center gap-2">
+                <LogIn size={16} className="opacity-60" aria-hidden="true" />
+                Login
+              </Link>
+            </Button>
+          )}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
