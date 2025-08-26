@@ -1,5 +1,6 @@
 import DepositMoney from "@/pages/user/DepositMoney";
 import SendMoney from "@/pages/user/SendMoney";
+import WithdrawMoney from "@/pages/user/WithdrawMoney";
 import type { ISidebarItem } from "@/types";
 
 export const userSidebarItems: ISidebarItem[] = [
@@ -15,6 +16,11 @@ export const userSidebarItems: ISidebarItem[] = [
         title: "Deposit Money",
         url: "/user/deposit-money",
         Component: DepositMoney,
+      },
+      {
+        title: "Withdraw Money",
+        url: "/user/withdraw-money",
+        Component: WithdrawMoney,
       },
     ],
   },

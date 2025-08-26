@@ -16,8 +16,7 @@ import { toast } from "sonner";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useDepositMutation } from "@/redux/features/Transaction/transaction.api";
 
-
-export function DepositMoneyForm({
+export function WithdrawMoneyForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -43,18 +42,14 @@ export function DepositMoneyForm({
       amount: Number(data.amount),
     };
 
-    // if (userRole !== role.agent) {
-    //   toast.error("You do not have permission to do this action", {
-    //     id: toastId,
-    //   });
-    // }
+   
 
     try {
       const res = await depositMoney(depositMoneyData).unwrap();
       console.log(res);
 
       if (res.success) {
-        toast.success(`${data.amount} Taka Deposit Successfully`, {
+        toast.success(`${data.amount} Taka Withdraw Successfully`, {
           id: toastId,
         });
       }
@@ -64,6 +59,8 @@ export function DepositMoneyForm({
     } catch (err: any) {
       console.error(err);
       toast.error("Something Went Wrong", { id: toastId });
+    } finally {
+      toast.dismiss();
     }
   };
 
@@ -79,7 +76,7 @@ export function DepositMoneyForm({
               <div className="flex flex-col gap-6">
                 {/* Header */}
                 <div className="flex flex-col items-center text-center">
-                  <h1 className="text-2xl font-bold">Deposit Money</h1>
+                  <h1 className="text-2xl font-bold">Withdraw Money</h1>
                   <p className="text-muted-foreground text-sm"></p>
                 </div>
 
