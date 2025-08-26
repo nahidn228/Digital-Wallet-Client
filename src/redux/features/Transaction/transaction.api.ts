@@ -3,10 +3,10 @@ import { baseApi } from "@/redux/baseApi";
 export const transactionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     deposit: builder.mutation({
-      query: (addTourData) => ({
+      query: (depositData) => ({
         url: "/transaction/deposit",
         method: "POST",
-        data: addTourData,
+        data: depositData,
       }),
       invalidatesTags: ["Transaction"],
     }),
@@ -53,10 +53,10 @@ export const transactionApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: { status },
       }),
-      invalidatesTags: ["Transaction"], 
+      invalidatesTags: ["Transaction"],
       transformResponse: (response) => response.data,
     }),
   }),
 });
 
-export const {useSendMoneyMutation} = transactionApi;
+export const { useSendMoneyMutation, useDepositMutation } = transactionApi;

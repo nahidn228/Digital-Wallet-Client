@@ -14,16 +14,18 @@ import {
 
 import { toast } from "sonner";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
-import { useSendMoneyMutation } from "@/redux/features/Transaction/transaction.api";
+import { useDepositMutation } from "@/redux/features/Transaction/transaction.api";
 
-export function SendMoneyForm({
+
+export function DepositMoneyForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const { data } = useUserInfoQuery(undefined);
-  const [sendMoney] = useSendMoneyMutation();
+  const [depositMoney] = useDepositMutation();
 
   const userEmail = data?.data?.email;
+  // const userRole = data?.data?.role;
 
   const form = useForm({
     defaultValues: {
@@ -35,24 +37,33 @@ export function SendMoneyForm({
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Money Sending...");
 
-    const sendMoneyData = {
+    const depositMoneyData = {
       senderEmail: userEmail,
       receiverEmail: data.receiverEmail.trim(),
       amount: Number(data.amount),
     };
 
+    // if (userRole !== role.agent) {
+    //   toast.error("You do not have permission to do this action", {
+    //     id: toastId,
+    //   });
+    // }
+
     try {
-      const res = await sendMoney(sendMoneyData).unwrap();
+      const res = await depositMoney(depositMoneyData).unwrap();
       console.log(res);
 
       if (res.success) {
-        toast.success(`${data.amount} send Successfully`, { id: toastId });
+        toast.success(`${data.amount} Taka Deposit Successfully`, {
+          id: toastId,
+        });
       }
       form.reset();
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error(err);
-      toast.error(err.data.message, { id: toastId });
+      toast.error("Something Went Wrong", { id: toastId });
     }
   };
 
@@ -68,7 +79,7 @@ export function SendMoneyForm({
               <div className="flex flex-col gap-6">
                 {/* Header */}
                 <div className="flex flex-col items-center text-center">
-                  <h1 className="text-2xl font-bold">Send Money</h1>
+                  <h1 className="text-2xl font-bold">Deposit Money</h1>
                   <p className="text-muted-foreground text-sm"></p>
                 </div>
 
