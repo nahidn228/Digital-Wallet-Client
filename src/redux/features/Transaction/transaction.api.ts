@@ -27,8 +27,8 @@ export const transactionApi = baseApi.injectEndpoints({
       invalidatesTags: ["Transaction"],
     }),
     userTransHistory: builder.query({
-      query: ({ walletId, ...filters }) => ({
-        url: `/transaction/history/${walletId}`,
+      query: ({ walletEmail, ...filters }) => ({
+        url: `/transaction/history/${walletEmail}`,
         method: "GET",
         params: filters,
       }),
@@ -38,7 +38,7 @@ export const transactionApi = baseApi.injectEndpoints({
 
     allTransHistory: builder.query({
       query: (params) => ({
-        url: "/transaction",
+        url: "/transaction/transaction",
         method: "GET",
         params,
       }),
@@ -64,4 +64,5 @@ export const {
   useDepositMutation,
   useWithdrawMutation,
   useUserTransHistoryQuery,
+  useAllTransHistoryQuery
 } = transactionApi;

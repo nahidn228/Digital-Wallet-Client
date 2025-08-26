@@ -34,3 +34,17 @@ export interface ITransactionStatus {
   CANCELLED: "Cancelled";
   REVERSED: "Reversed";
 }
+
+
+export interface IUser {
+  _id: string
+  name: string
+  email: string
+  phone: string
+  role: string
+  isVerified: boolean
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+  id: string
+}

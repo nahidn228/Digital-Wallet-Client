@@ -5,22 +5,9 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar";
 import { AppSidebar } from "../app-sidebar";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useGetSingleWalletQuery } from "@/redux/features/wallet/wallet.api";
-import {
-  Card,
-  CardContent,
-
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import {
- 
-  Mail,
-  Phone,
-  Shield,
-  User,
-  Wallet,
-
-} from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Mail, Phone, Shield, User, Wallet } from "lucide-react";
+import { ModeToggle } from "../mode-toggle";
 
 export default function DashboardLayout() {
   const { data: user } = useUserInfoQuery(undefined);
@@ -39,6 +26,7 @@ export default function DashboardLayout() {
             orientation="vertical"
             className="mr-2 data-[orientation=vertical]:h-4"
           />
+          <ModeToggle />
         </header>
 
         {/* User Info */}

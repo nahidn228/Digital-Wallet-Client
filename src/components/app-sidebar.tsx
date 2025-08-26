@@ -16,23 +16,25 @@ import { Link } from "react-router";
 import { getSidebarItem } from "@/utils/getSidebarItems";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userData } = useUserInfoQuery(undefined);
-  console.log(userData?.data.role)
+  console.log(userData?.data.role);
 
   const data = {
     navMain: getSidebarItem(userData?.data.role),
     // navMain: adminSidebarItems,
   };
 
-console.log(data.navMain)
+  console.log(data.navMain);
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
+      <SidebarHeader className="flex">
         <Link to={"/"}>
           <Logo />
         </Link>
+       
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
@@ -41,7 +43,7 @@ console.log(data.navMain)
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {item.items.map((item ) => (
+                {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
                       <Link to={item.url}>{item.title}</Link>
@@ -53,7 +55,9 @@ console.log(data.navMain)
           </SidebarGroup>
         ))}
       </SidebarContent>
+  
       <SidebarRail />
+
     </Sidebar>
   );
 }

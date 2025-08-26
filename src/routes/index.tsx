@@ -70,7 +70,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.admin || role.user || role.agent),
     path: "/user",
     // children: [
     //   {

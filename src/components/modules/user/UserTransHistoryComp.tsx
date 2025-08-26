@@ -54,6 +54,7 @@ const UserTransHistoryComp = () => {
   console.log(userInfo);
 
   const { data, refetch } = useUserTransHistoryQuery({
+    walletEmail: userInfo?.email,
     page,
     limit: 10,
     type: filterType === "all" ? null : filterType,
