@@ -1,6 +1,6 @@
 import { baseApi } from "@/redux/baseApi";
 
-export const divisionApi = baseApi.injectEndpoints({
+export const walletApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     addDivision: builder.mutation({
       query: (divisionData) => ({
@@ -8,20 +8,20 @@ export const divisionApi = baseApi.injectEndpoints({
         method: "POST",
         data: divisionData,
       }),
-      invalidatesTags: ["DIVISION"],
+      invalidatesTags: ["Wallet"],
     }),
 
-    getDivisions: builder.query({
-      query: (params) => ({
-        url: "/division",
+    getSingleWallet: builder.query({
+      query: ({ email, ...params }) => ({
+        url: `/wallet/profile/${email}`,
         method: "GET",
         params,
       }),
-      providesTags: ["DIVISION"],
+      providesTags: ["Wallet"],
       //only get the data
       transformResponse: (response) => response.data,
     }),
   }),
 });
 
-export const { useAddDivisionMutation, useGetDivisionsQuery } = divisionApi;
+export const { useGetSingleWalletQuery } = walletApi;

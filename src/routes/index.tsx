@@ -79,7 +79,7 @@ const router = createBrowserRouter([
     //   },
     // ],
     children: [
-      { index: true, element: <Navigate to={"/user/send-money"} /> },
+      { index: true, element: <Navigate to={"/user/trans-history"} /> },
       ...generateRoutes(userSidebarItems),
     ],
   },
