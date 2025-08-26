@@ -14,14 +14,14 @@ import {
 
 import { toast } from "sonner";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
-import { useDepositMutation } from "@/redux/features/Transaction/transaction.api";
+import { useWithdrawMutation } from "@/redux/features/Transaction/transaction.api";
 
 export function WithdrawMoneyForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const { data } = useUserInfoQuery(undefined);
-  const [depositMoney] = useDepositMutation();
+  const [withdrawMoney] = useWithdrawMutation();
 
   const userEmail = data?.data?.email;
   // const userRole = data?.data?.role;
@@ -34,18 +34,16 @@ export function WithdrawMoneyForm({
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("Money Sending...");
+    const toastId = toast.loading("Please wait while processing...");
 
-    const depositMoneyData = {
+    const withdrawMoneyData = {
       senderEmail: userEmail,
       receiverEmail: data.receiverEmail.trim(),
       amount: Number(data.amount),
     };
 
-   
-
     try {
-      const res = await depositMoney(depositMoneyData).unwrap();
+      const res = await withdrawMoney(withdrawMoneyData).unwrap();
       console.log(res);
 
       if (res.success) {
@@ -59,8 +57,6 @@ export function WithdrawMoneyForm({
     } catch (err: any) {
       console.error(err);
       toast.error("Something Went Wrong", { id: toastId });
-    } finally {
-      toast.dismiss();
     }
   };
 

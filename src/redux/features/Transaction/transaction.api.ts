@@ -26,19 +26,19 @@ export const transactionApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Transaction"],
     }),
-    getAllTours: builder.query({
-      query: (params) => ({
-        url: "/transaction",
+    userTransHistory: builder.query({
+      query: ({ walletId, ...filters }) => ({
+        url: `/transaction/history/${walletId}`,
         method: "GET",
-        params: params,
+        params: filters,
       }),
       providesTags: ["Transaction"],
-      // transformResponse: (response: IResponse<ITourPackage[]>) => response.data,
+      transformResponse: (response) => response.data,
     }),
 
-    transHistory: builder.query({
+    allTransHistory: builder.query({
       query: (params) => ({
-        url: "/history/:walletId",
+        url: "/transaction",
         method: "GET",
         params,
       }),
@@ -59,4 +59,9 @@ export const transactionApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useSendMoneyMutation, useDepositMutation } = transactionApi;
+export const {
+  useSendMoneyMutation,
+  useDepositMutation,
+  useWithdrawMutation,
+  useUserTransHistoryQuery,
+} = transactionApi;

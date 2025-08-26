@@ -33,14 +33,16 @@ interface IUser {
 
 const AllUser = () => {
   const [page, setPage] = useState(1);
-  const [searchEmail, setSearchEmail] = useState("");
-  const [filterRole, setFilterRole] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterType, setFilterType] = useState("");
 
   const { data, refetch } = useGetAllUserQuery({
     page,
     limit: 5,
-    email: searchEmail,
-    role: filterRole === "all" ? null : filterRole,
+    role: filterType === "all" ? null : filterType,
+
+    type: filterType || undefined,
+    search: searchQuery || undefined,
   });
 
   const users = data?.data?.users;
@@ -51,7 +53,7 @@ const AllUser = () => {
   useEffect(() => {
     setPage(1);
     refetch();
-  }, [searchEmail, filterRole, refetch]);
+  }, [filterType, refetch]);
 
   return (
     <section className="">
@@ -64,12 +66,12 @@ const AllUser = () => {
         {/* Filters */}
         <div className="flex gap-2 mb-4 flex-col md:flex-row">
           <Input
-            placeholder="Search by email"
-            value={searchEmail}
-            onChange={(e) => setSearchEmail(e.target.value)}
+            value={searchQuery}
+            placeholder="Search by ID, type, status, or email"
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="flex-1"
           />
-          <Select value={filterRole} onValueChange={setFilterRole}>
+          <Select value={filterType} onValueChange={setFilterType}>
             <SelectTrigger className="w-48">
               <SelectValue placeholder="Filter by role" />
             </SelectTrigger>
