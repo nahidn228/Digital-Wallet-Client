@@ -18,11 +18,15 @@ import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userData } = useUserInfoQuery(undefined);
+  console.log(userData?.data.role)
 
   const data = {
     navMain: getSidebarItem(userData?.data.role),
     // navMain: adminSidebarItems,
   };
+
+console.log(data.navMain)
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>

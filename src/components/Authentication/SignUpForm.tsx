@@ -35,6 +35,7 @@ export function SignUpForm({
 }: React.ComponentProps<"div">) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  //  const [images, setImages] = useState<(File | FileMetadata)[] | []>([]);
 
   const navigate = useNavigate();
   const [register] = useRegisterMutation();
@@ -70,7 +71,7 @@ export function SignUpForm({
       navigate("/login");
     } catch (error: any) {
       console.error(error);
-      toast.error(error.message , { id: toastId });
+      toast.error(error.message, { id: toastId });
     }
   };
 
@@ -171,6 +172,8 @@ export function SignUpForm({
                     </FormItem>
                   )}
                 />
+
+                {/* <MultipleImageUploader onChange={setImages} /> */}
 
                 {/* Password */}
                 <FormField

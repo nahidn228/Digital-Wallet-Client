@@ -16,4 +16,4 @@ export interface ISidebarItem {
   }[];
 }
 
-export type TRole = "AGENT" | "ADMIN" | "USER";
+export type TRole = "Agent" | "Admin" | "User";

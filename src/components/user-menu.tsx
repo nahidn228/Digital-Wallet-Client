@@ -105,7 +105,10 @@ export default function UserMenu() {
             <span>Option 4</span>
           </DropdownMenuItem> */}
           <DropdownMenuItem>
-            <Link to={"/admin/analytics"} className="flex gap-2">
+            <Link
+              to={`${userInfo.role === "Admin" ? "/admin" : "/user"}`}
+              className="flex gap-2"
+            >
               <BookOpenIcon
                 size={16}
                 className="opacity-60"
