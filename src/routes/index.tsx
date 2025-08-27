@@ -11,7 +11,7 @@ import Faq from "@/pages/Faq";
 import Features from "@/pages/Features";
 import HomePage from "@/pages/HomePage";
 import Pricing from "@/pages/Pricing";
-import Success from "@/pages/Success";
+
 import UnAuthorized from "@/pages/UnAuthorized";
 import Verify from "@/pages/Verify";
 import type { TRole } from "@/types";
@@ -21,6 +21,8 @@ import { withAuth } from "@/utils/withAuth";
 import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { userSidebarItems } from "./userSidebarItems";
+import ProfilePage from "@/pages/ProfilePage";
+import { UpdateProfileForm } from "@/components/modules/user/UpdateProfileForm";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
         path: "faq",
       },
       {
+        Component: withAuth(ProfilePage),
+        path: "/profile",
+      },
+      {
+        Component: UpdateProfileForm,
+        path: "/editProfile",
+      },
+      {
         Component: LoginPage,
         path: "/login",
       },
@@ -70,7 +80,10 @@ const router = createBrowserRouter([
     ],
   },
   {
-    Component: withAuth(DashboardLayout, role.admin || role.user || role.agent),
+    Component: withAuth(
+      DashboardLayout,
+      (role.admin as TRole) || (role.user as TRole) || (role.agent as TRole)
+    ),
     path: "/user",
     // children: [
     //   {
@@ -91,10 +104,7 @@ const router = createBrowserRouter([
     Component: UnAuthorized,
     path: "/unAuthorized",
   },
-  {
-    Component: Success,
-    path: "/payment/success",
-  },
+
   {
     Component: Fail,
     path: "/payment/fail",

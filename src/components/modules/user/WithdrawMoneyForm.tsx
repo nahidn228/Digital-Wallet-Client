@@ -44,7 +44,7 @@ export function WithdrawMoneyForm({
 
     try {
       const res = await withdrawMoney(withdrawMoneyData).unwrap();
-      console.log(res);
+
 
       if (res.success) {
         toast.success(`${data.amount} Taka Withdraw Successfully`, {

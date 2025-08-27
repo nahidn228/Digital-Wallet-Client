@@ -43,7 +43,7 @@ export function SendMoneyForm({
 
     try {
       const res = await sendMoney(sendMoneyData).unwrap();
-      console.log(res);
+  
 
       if (res.success) {
         toast.success(`${data.amount} send Successfully`, { id: toastId });

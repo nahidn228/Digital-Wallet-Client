@@ -51,7 +51,7 @@ const UserTransHistoryComp = () => {
   const { data: user } = useUserInfoQuery(undefined);
   const userInfo = user?.data;
 
-  console.log(userInfo);
+
 
   const { data, refetch } = useUserTransHistoryQuery({
     walletEmail: userInfo?.email,
@@ -61,7 +61,7 @@ const UserTransHistoryComp = () => {
     search: search || undefined,
   });
 
-  console.log(data);
+
   const transactions = data?.transactions;
   const total = data?.total || 0;
   const totalPages = Math.ceil(total / 5);

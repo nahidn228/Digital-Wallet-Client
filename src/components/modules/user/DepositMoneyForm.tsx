@@ -51,7 +51,7 @@ export function DepositMoneyForm({
 
     try {
       const res = await depositMoney(depositMoneyData).unwrap();
-      console.log(res);
+   
 
       if (res.success) {
         toast.success(`${data.amount} Taka Deposit Successfully`, {

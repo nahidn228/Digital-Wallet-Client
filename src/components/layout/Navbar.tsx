@@ -30,6 +30,8 @@ export default function Navbar() {
   const { data } = useUserInfoQuery(undefined);
   const userEmail = data?.data?.email;
 
+  console.log(data);
+
   return (
     <header className="border-b px-4 md:px-6 backdrop-blur-2xl sticky top-0 z-50 bg-background/80">
       <div className="flex h-16 justify-between items-center gap-4">

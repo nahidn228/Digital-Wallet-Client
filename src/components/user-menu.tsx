@@ -30,7 +30,7 @@ export default function UserMenu() {
   const [logout] = useLogOutMutation();
   const userInfo = data?.data;
 
-  console.log(data);
+
 
   const dispatch = useAppDispatch();
 

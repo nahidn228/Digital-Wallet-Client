@@ -16,7 +16,6 @@ const Analytics = () => {
   const { data: userData } = useGetAllUserQuery({ page: 1, limit: 1000 });
   const users = userData?.data?.users || [];
 
-  console.log(users);
   // Fetch transaction stats (count & volume)
   const { data: transactionData } = useAllTransHistoryQuery(undefined);
   const totalTransactions = transactionData?.total || 0;

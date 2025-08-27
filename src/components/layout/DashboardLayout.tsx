@@ -14,7 +14,7 @@ export default function DashboardLayout() {
   const userEmail = user?.data?.email;
 
   const { data } = useGetSingleWalletQuery({ email: userEmail });
-  console.log({ data, user });
+ 
 
   return (
     <SidebarProvider>

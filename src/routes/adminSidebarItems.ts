@@ -25,6 +25,7 @@ export const adminSidebarItems: ISidebarItem[] = [
         url: "/admin/all-users",
         Component: AllUser,
       },
+      
     ],
   },
 ];

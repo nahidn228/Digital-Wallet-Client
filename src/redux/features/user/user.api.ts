@@ -2,15 +2,23 @@ import { baseApi } from "@/redux/baseApi";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // login: builder.mutation({
-    //   query: (userInfo) => ({
-    //     url: "/auth/login",
-    //     method: "POST",
-    //     // body: userInfo,
-    //     data: userInfo,
+    // updateUser: builder.mutation({
+    //   query: ({ email, ...body }) => ({
+    //     url: `/user/${email}`,
+    //     method: "PUT",
+    //     body,
     //   }),
     //   invalidatesTags: ["USER"],
     // }),
+
+    updateUserInfo: builder.mutation({
+      query: ({ email, ...payload }) => ({
+        url: `/user/${email}`,
+        method: "PATCH",
+        data: payload,
+      }),
+      invalidatesTags: ["USER"],
+    }),
 
     getAllUser: builder.query({
       query: ({ page = 1, limit = 10, email = "", role = "" }) => ({
@@ -23,4 +31,4 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllUserQuery } = authApi;
+export const { useGetAllUserQuery, useUpdateUserInfoMutation } = authApi;

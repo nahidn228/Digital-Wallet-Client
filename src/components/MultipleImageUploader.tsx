@@ -11,7 +11,7 @@ export default function MultipleImageUploader({
 }) {
   const maxSizeMB = 5;
   const maxSize = maxSizeMB * 1024 * 1024; // 5MB default
-  const maxFiles = 3;
+  const maxFiles = 1;
 
   const [
     { files, isDragging, errors },
@@ -41,7 +41,7 @@ export default function MultipleImageUploader({
   }, [files, onChange]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 py-4">
       {/* Drop area */}
       <div
         onDragEnter={handleDragEnter}
@@ -82,12 +82,12 @@ export default function MultipleImageUploader({
               {files.map((file) => (
                 <div
                   key={file.id}
-                  className="bg-accent relative aspect-square rounded-md"
+                  className="relative w-full max-w-[150px] aspect-square rounded-md overflow-hidden border "
                 >
                   <img
                     src={file.preview}
                     alt={file.file.name}
-                    className="size-full rounded-[inherit] object-cover"
+                    className="w-full h-full object-cover"
                   />
                   <Button
                     type="button"

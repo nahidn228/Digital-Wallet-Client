@@ -53,8 +53,6 @@ export function SignUpForm({
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
-
     const toastId = toast.loading("User Creating...");
 
     const userInfo = {
@@ -66,8 +64,9 @@ export function SignUpForm({
     };
     try {
       const result = await register(userInfo).unwrap();
-      console.log(result);
-      toast.success("User created successfully", { id: toastId });
+
+      if (result.success)
+        toast.success("User created successfully", { id: toastId });
       navigate("/login");
     } catch (error: any) {
       console.error(error);

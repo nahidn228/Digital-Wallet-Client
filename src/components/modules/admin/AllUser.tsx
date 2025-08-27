@@ -49,6 +49,11 @@ const AllUser = () => {
   const total = data?.data?.total || 0;
   const totalPages = Math.ceil(total / 5);
 
+
+  
+
+
+
   // Refetch on filters change
   useEffect(() => {
     setPage(1);
@@ -108,7 +113,21 @@ const AllUser = () => {
                   <TableCell>
                     {user.isVerified ? "Verified" : "Not Verified"}
                   </TableCell>
-                  <TableCell>{user.isActive ? "Active" : "Inactive"}</TableCell>
+                  <TableCell>
+                    {/* {user.isActive ? "Active" : "Inactive"} */}
+
+                    <Select>
+                      <SelectTrigger className="w-44">
+                        <SelectValue
+                          placeholder={user.isActive ? "Block" : "Unblock"}
+                        />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value={"true"}>Block</SelectItem>
+                        <SelectItem value={"false"}>Unblock</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
                   <TableCell>
                     <Button variant="destructive" size="icon">
                       <Trash2 />
