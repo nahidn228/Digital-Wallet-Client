@@ -126,3 +126,44 @@ npm install
 ```
 
 ---
+
+## Usage
+
+1. **Public Access:**  
+   - Explore the landing pages such as `/`, `/about`, `/features`, etc.  
+   - Learn about the service, team, and features without logging in.
+
+2. **Authentication:**  
+   - Register or log in with a **User**, **Agent**, or **Admin** account.  
+   - Role-based redirection ensures each user sees only the relevant dashboard.
+
+3. **User Dashboard:**  
+   - Perform wallet operations: deposit, withdraw, send money.  
+   - View transaction history with pagination and filters.  
+   - Update profile information and change password securely.
+
+4. **Agent Dashboard:**  
+   - Manage cash-in/out for users.  
+   - View all handled transactions and (optional) commission history.  
+   - Update agent profile information and password.
+
+5. **Admin Dashboard:**  
+   - Monitor users, agents, and transactions.  
+   - Block/unblock users or approve/suspend agents.  
+   - Apply filters, search, and paginate through records.  
+   - Update admin profile and settings.
+
+---
+
+## Contact
+
+For any inquiries or suggestions, you can reach me at:  
+- **Email:** nahidn228@gmail.com  
+- **GitHub:** [https://github.com/nahidn228](https://github.com/nahidn228)  
+- **LinkedIn:** [https://www.linkedin.com/in/nahid-hasan01/](https://www.linkedin.com/in/nahid-hasan01/)  
+
+---
+
+## Acknowledgements
+
+Special thanks to the **Programming Hero Team** for their guidance and resources during the project development.
