@@ -11,8 +11,7 @@ const Footer = () => {
             </div>
 
             <p className="mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left dark:text-gray-400">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
-              consequuntur amet culpa cum itaque neque.
+             A secure, role-based, and user-friendly frontend application for a Digital Wallet System (similar to bKash or Nagad), built with React.js, Redux Toolkit, and RTK Query. 
             </p>
 
             <ul className="mt-8 flex justify-center gap-6 sm:justify-start md:gap-8">
