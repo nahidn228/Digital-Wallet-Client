@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Card,
   CardContent,
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Select,
@@ -31,35 +31,35 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import z from "zod";
+
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 import { toast } from "sonner";
 import { useUpdateUserInfoMutation } from "@/redux/features/user/user.api";
-import { Eye, EyeOff } from "lucide-react";
+
 import { ChangePassword } from "@/components/modules/ChangePassword";
 
 // Define the validation schema with proper optional fields
-const updateProfileSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters").optional(),
-  email: z.email("Invalid email address").optional(),
-  phone: z
-    .string()
-    .min(10, "Phone number must be at least 10 digits")
-    .optional(),
-  role: z.enum(["User", "Agent", "Admin"]),
-  profilePicture: z.string().optional(),
-  nid: z.string().optional(),
-  address: z.string().optional(),
-  dateOfBirth: z.string().optional(),
-});
+// const updateProfileSchema = z.object({
+//   name: z.string().min(2, "Name must be at least 2 characters").optional(),
+//   email: z.email("Invalid email address").optional(),
+//   phone: z
+//     .string()
+//     .min(10, "Phone number must be at least 10 digits")
+//     .optional(),
+//   role: z.enum(["User", "Agent", "Admin"]),
+//   profilePicture: z.string().optional(),
+//   nid: z.string().optional(),
+//   address: z.string().optional(),
+//   dateOfBirth: z.string().optional(),
+// });
 
-type UpdateProfileFormValues = z.infer<typeof updateProfileSchema>;
+// type UpdateProfileFormValues = z.infer<typeof updateProfileSchema>;
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("profile");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
+  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [isEditing, setIsEditing] = useState(false);
   const { data } = useUserInfoQuery(undefined);

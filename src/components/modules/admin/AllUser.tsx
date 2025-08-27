@@ -16,8 +16,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetAllUserQuery } from "@/redux/features/user/user.api";
-import { ChevronFirst, ChevronLast, Trash2 } from "lucide-react";
+import {
+  useGetAllUserQuery,
+  useUpdateUserStatusMutation,
+} from "@/redux/features/user/user.api";
+import { ChevronFirst, ChevronLast, InspectIcon, Trash2 } from "lucide-react";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 interface IUser {
   _id: string;
@@ -45,14 +61,39 @@ const AllUser = () => {
     search: searchQuery || undefined,
   });
 
+  const [updateUserStatus] = useUpdateUserStatusMutation();
+
   const users = data?.data?.users;
   const total = data?.data?.total || 0;
   const totalPages = Math.ceil(total / 5);
 
+  const handleStatusChange = async (userId: string, payload: boolean) => {
+    const toastId = toast.loading("Updating User Status...");
 
-  
+    console.log({ userId, payload });
 
+    console.log(payload);
 
+    try {
+      const res = await updateUserStatus({
+        userId,
+        isActive: payload,
+      }).unwrap();
+
+      console.log(res);
+
+      if (res.success) {
+        toast.success("User Status Updated Successfully", { id: toastId });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("User Status Not Updated. Something went wrong ", {
+        id: toastId,
+      });
+    } finally {
+      refetch();
+    }
+  };
 
   // Refetch on filters change
   useEffect(() => {
@@ -119,19 +160,54 @@ const AllUser = () => {
                     <Select>
                       <SelectTrigger className="w-44">
                         <SelectValue
-                          placeholder={user.isActive ? "Block" : "Unblock"}
+                          placeholder={user.isActive ? "Active" : "Block"}
                         />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value={"true"}>Block</SelectItem>
-                        <SelectItem value={"false"}>Unblock</SelectItem>
+                        <SelectItem value={"true"}>Active</SelectItem>
+                        <SelectItem value={"false"}>Block</SelectItem>
                       </SelectContent>
                     </Select>
                   </TableCell>
                   <TableCell>
-                    <Button variant="destructive" size="icon">
-                      <Trash2 />
-                    </Button>
+                    <div className=" flex gap-2">
+                      {/* <Button variant="outline" size="icon">
+                      <InspectIcon />
+                    </Button> */}
+
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="outline" size="icon">
+                            <InspectIcon />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Are you absolutely sure?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action can be undone. This will update user
+                              account.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() =>
+                                handleStatusChange(user?._id, !user?.isActive)
+                              }
+                            >
+                              Continue
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+
+                      <Button variant="destructive" size="icon">
+                        <Trash2 />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
