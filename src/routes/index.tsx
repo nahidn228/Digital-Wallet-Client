@@ -23,6 +23,7 @@ import { adminSidebarItems } from "./adminSidebarItems";
 import { userSidebarItems } from "./userSidebarItems";
 import ProfilePage from "@/pages/ProfilePage";
 import { UpdateProfileForm } from "@/components/modules/user/UpdateProfileForm";
+import PageTransition from "@/components/PageTransition";
 
 const allRoles: TRole[] = ["Agent", "Admin", "User"];
 
@@ -32,44 +33,49 @@ const router = createBrowserRouter([
     path: "/",
     children: [
       {
-        index: true,
-        Component: HomePage,
-      },
-      {
-        Component: About,
-        path: "about",
-      },
-      {
-        Component: Features,
-        path: "features",
-      },
-      {
-        Component: Pricing,
-        path: "pricing",
-      },
-      {
-        Component: Contact,
-        path: "contact",
-      },
-      {
-        Component: Faq,
-        path: "faq",
-      },
-      {
-        Component: withAuth(ProfilePage),
-        path: "/profile",
-      },
-      {
-        Component: UpdateProfileForm,
-        path: "/editProfile",
-      },
-      {
-        Component: LoginPage,
-        path: "/login",
-      },
-      {
-        Component: RegisterPage,
-        path: "/register",
+        element: <PageTransition />,
+        children: [
+          {
+            index: true,
+            Component: HomePage,
+          },
+          {
+            Component: About,
+            path: "about",
+          },
+          {
+            Component: Features,
+            path: "features",
+          },
+          {
+            Component: Pricing,
+            path: "pricing",
+          },
+          {
+            Component: Contact,
+            path: "contact",
+          },
+          {
+            Component: Faq,
+            path: "faq",
+          },
+          {
+            Component: withAuth(ProfilePage),
+            path: "/profile",
+          },
+          {
+            Component: UpdateProfileForm,
+            path: "/editProfile",
+          },
+          {
+            Component: LoginPage,
+            path: "/login",
+          },
+          {
+            Component: RegisterPage,
+            path: "/register",
+          },
+        ],
       },
     ],
   },

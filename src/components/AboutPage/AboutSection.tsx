@@ -2,10 +2,9 @@ import Logo from "@/assets/icon/Logo";
 import { Button } from "@/components/ui/button";
 import walletImage from "@/assets/image/tree-grows-coin.jpg";
 import dollarImage from "@/assets/image/doller.jpg";
-import WhyWork from "../HomePage/WhyWork";
-import WhyChoose from "../HomePage/WhyChoose";
-import TeamSection from "./TeamSection";
+
 import CountUp from "react-countup";
+import { lazy } from "react";
 interface About3Props {
   title?: string;
   description?: string;
@@ -71,6 +70,10 @@ const defaultAchievements = [
   { label: "Happy Customers", value: 99 },
   { label: "Recognized Awards", value: 10 },
 ];
+
+const TeamSection = lazy(() => import("./TeamSection"));
+const WhyWork = lazy(() => import("../HomePage/WhyWork"));
+const WhyChoose = lazy(() => import("../HomePage/WhyChoose"));
 
 const AboutSection = ({
   title = "About Us",
@@ -183,7 +186,7 @@ const AboutSection = ({
                   <CountUp
                     start={0}
                     end={item.value}
-                    duration={2.5} // speed of animation
+                    duration={2.5}
                     suffix={item.label === "Happy Customers" ? "%" : "+"}
                   />
                 </span>
