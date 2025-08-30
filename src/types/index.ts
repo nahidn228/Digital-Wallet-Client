@@ -18,6 +18,8 @@ export interface ISidebarItem {
 
 export type TRole = "Agent" | "Admin" | "User";
 
+
+
 export type TTransactionType = {
   DEPOSIT: "Deposit";
   WITHDRAW: "Withdraw";

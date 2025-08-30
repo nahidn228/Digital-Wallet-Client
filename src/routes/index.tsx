@@ -24,6 +24,8 @@ import { userSidebarItems } from "./userSidebarItems";
 import ProfilePage from "@/pages/ProfilePage";
 import { UpdateProfileForm } from "@/components/modules/user/UpdateProfileForm";
 
+const allRoles: TRole[] = ["Agent", "Admin", "User"];
+
 const router = createBrowserRouter([
   {
     Component: App,
@@ -72,7 +74,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    Component: withAuth(DashboardLayout, role.admin as TRole),
+    Component: withAuth(DashboardLayout, [role.admin] as TRole[]),
     path: "/admin",
     children: [
       { index: true, element: <Navigate to={"/admin/analytics"} /> },
@@ -80,22 +82,15 @@ const router = createBrowserRouter([
     ],
   },
   {
-    Component: withAuth(
-      DashboardLayout,
-      (role.admin as TRole) || (role.user as TRole) || (role.agent as TRole)
-    ),
+    Component: withAuth(DashboardLayout, allRoles as TRole[]),
     path: "/user",
-    // children: [
-    //   {
-    //     path: "/user/bookings",
-    //     Component: Bookings,
-    //   },
-    // ],
+
     children: [
       { index: true, element: <Navigate to={"/user/trans-history"} /> },
       ...generateRoutes(userSidebarItems),
     ],
   },
+
   {
     Component: Verify,
     path: "/verify",

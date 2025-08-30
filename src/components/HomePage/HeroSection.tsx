@@ -30,7 +30,7 @@ const HeroSection = ({
   buttons = {
     primary: {
       text: "Get Started",
-      url: "#",
+      url: "/user/send-money",
     },
     secondary: {
       text: "Read the docs",
@@ -55,10 +55,11 @@ const HeroSection = ({
           </p>
           <div className="flex flex-wrap items-start gap-5 lg:gap-7">
             <Button asChild>
-              <Link to={"/"}>
+              <Link to={"/user/trans-history"}>
                 <div className="flex items-center gap-2">
                   <ArrowUpRight className="size-4" />
                 </div>
+
                 <span className="pr-6 pl-4 text-sm whitespace-nowrap lg:pr-8 lg:pl-6 lg:text-base">
                   {buttons.primary?.text}
                 </span>

@@ -30,6 +30,7 @@ export interface IUserTrans {
   totalAmount: number;
   status: string;
   senderId: string;
+  senderEmail: string;
   receiverEmail: string;
   senderWalletId: string;
   receiverId: string;
@@ -51,8 +52,6 @@ const UserTransHistoryComp = () => {
   const { data: user } = useUserInfoQuery(undefined);
   const userInfo = user?.data;
 
-
-
   const { data, refetch } = useUserTransHistoryQuery({
     walletEmail: userInfo?.email,
     page,
@@ -60,7 +59,6 @@ const UserTransHistoryComp = () => {
     type: filterType === "all" ? null : filterType,
     search: search || undefined,
   });
-
 
   const transactions = data?.transactions;
   const total = data?.total || 0;
@@ -72,13 +70,23 @@ const UserTransHistoryComp = () => {
     refetch();
   }, [search, filterType, refetch]);
 
+  console.log(transactions);
+
   return (
     <section className="">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <h2 className="mb-6 text-3xl font-bold  lg:text-4xl">
-          Transaction History of  <span className="text-primary">{userInfo?.name} </span>
-          </h2>
+          {userInfo?.role === "Admin" ? (
+            <h2 className="mb-6 text-3xl font-bold  lg:text-4xl">
+              Transaction History of{" "}
+              <span className="text-primary">All Users </span>
+            </h2>
+          ) : (
+            <h2 className="mb-6 text-3xl font-bold  lg:text-4xl">
+              Transaction History of{" "}
+              <span className="text-primary">{userInfo?.name} </span>
+            </h2>
+          )}
         </div>
         {/* Filters */}
         <div className="flex gap-2 mb-4 flex-col md:flex-row">
@@ -110,6 +118,7 @@ const UserTransHistoryComp = () => {
               <TableRow className="bg-muted/50">
                 <TableHead>Transaction Id</TableHead>
                 <TableHead>Type</TableHead>
+                <TableHead>Sender Email</TableHead>
                 <TableHead>Receiver Email</TableHead>
                 <TableHead>Amount</TableHead>
 
@@ -122,6 +131,11 @@ const UserTransHistoryComp = () => {
                 <TableRow key={transaction._id}>
                   <TableCell>{transaction.transactionId}</TableCell>
                   <TableCell>{transaction.type}</TableCell>
+                  <TableCell>
+                    {transaction?.senderEmail
+                      ? transaction?.senderEmail
+                      : " null"}
+                  </TableCell>
                   <TableCell>
                     {transaction.receiverEmail
                       ? transaction.receiverEmail

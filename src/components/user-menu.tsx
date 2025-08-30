@@ -30,7 +30,7 @@ export default function UserMenu() {
   const [logout] = useLogOutMutation();
   const userInfo = data?.data;
 
-
+  console.log(userInfo);
 
   const dispatch = useAppDispatch();
 
@@ -106,7 +106,7 @@ export default function UserMenu() {
           </DropdownMenuItem> */}
           <DropdownMenuItem>
             <Link
-              to={`${userInfo.role === "Admin" ? "/admin" : "/user"}`}
+              to={`${userInfo.role !== "Admin" ? "/user" : "/admin"}`}
               className="flex gap-2"
             >
               <BookOpenIcon
