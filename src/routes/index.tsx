@@ -12,7 +12,6 @@ import Features from "@/pages/Features";
 import HomePage from "@/pages/HomePage";
 import Pricing from "@/pages/Pricing";
 
-import UnAuthorized from "@/pages/UnAuthorized";
 import Verify from "@/pages/Verify";
 import type { TRole } from "@/types";
 import { generateRoutes } from "@/utils/generateRoutes";
@@ -24,12 +23,15 @@ import { userSidebarItems } from "./userSidebarItems";
 import ProfilePage from "@/pages/ProfilePage";
 import { UpdateProfileForm } from "@/components/modules/user/UpdateProfileForm";
 import PageTransition from "@/components/PageTransition";
+import ErrorPage from "@/components/layout/ErrorPage";
+import UnAuthorizedPage from "@/pages/UnAuthorizedPage";
 
 const allRoles: TRole[] = ["Agent", "Admin", "User"];
 
 const router = createBrowserRouter([
   {
     Component: App,
+    errorElement: <ErrorPage />,
     path: "/",
     children: [
       {
@@ -102,7 +104,7 @@ const router = createBrowserRouter([
     path: "/verify",
   },
   {
-    Component: UnAuthorized,
+    Component: UnAuthorizedPage,
     path: "/unAuthorized",
   },
 
