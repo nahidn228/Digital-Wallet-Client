@@ -20,6 +20,7 @@ import {
 import { ChevronFirst, ChevronLast } from "lucide-react";
 import { useUserTransHistoryQuery } from "@/redux/features/Transaction/transaction.api";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import { DashBoardLoader } from "@/components/ui/DashBoardLoader";
 
 export interface IUserTrans {
   _id: string;
@@ -49,7 +50,7 @@ const UserTransHistoryComp = () => {
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState("");
 
-  const { data: user } = useUserInfoQuery(undefined);
+  const { data: user, isLoading } = useUserInfoQuery(undefined);
   const userInfo = user?.data;
 
   const { data, refetch } = useUserTransHistoryQuery({
@@ -70,7 +71,9 @@ const UserTransHistoryComp = () => {
     refetch();
   }, [search, filterType, refetch]);
 
-  console.log(transactions);
+  if (isLoading) {
+    return <DashBoardLoader />;
+  }
 
   return (
     <section className="">

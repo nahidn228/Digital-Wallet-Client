@@ -1,19 +1,24 @@
-import { Card, CardHeader, CardContent} from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { User, Users, CreditCard, DollarSign } from "lucide-react";
 import { useGetAllUserQuery } from "@/redux/features/user/user.api";
 import { useAllTransHistoryQuery } from "@/redux/features/Transaction/transaction.api";
 import type { IUser } from "@/types";
 
+import { DashBoardLoader } from "@/components/ui/DashBoardLoader";
+
 interface Transaction {
   amount: number;
   type: string;
   totalAmount: number;
-
 }
 
 const Analytics = () => {
   // Fetch all users
-  const { data: userData } = useGetAllUserQuery({ page: 1, limit: 1000 });
+  const { data: userData, isLoading } = useGetAllUserQuery({
+    page: 1,
+    limit: 1000,
+  });
+
   const users = userData?.data?.users || [];
 
   // Fetch transaction stats (count & volume)
@@ -27,6 +32,10 @@ const Analytics = () => {
   const volume =
     transactions?.reduce((sum, tx) => sum + (tx.totalAmount || tx.amount), 0) ||
     0;
+
+  if (isLoading) {
+    return <DashBoardLoader />;
+  }
 
   return (
     <section className="p-6">

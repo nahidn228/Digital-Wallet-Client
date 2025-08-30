@@ -15,14 +15,14 @@ import {
 import { toast } from "sonner";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useDepositMutation } from "@/redux/features/Transaction/transaction.api";
-
+import { DashBoardLoader } from "@/components/ui/DashBoardLoader";
 
 export function DepositMoneyForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const { data } = useUserInfoQuery(undefined);
-  const [depositMoney] = useDepositMutation();
+  const [depositMoney, { isLoading }] = useDepositMutation();
 
   const userEmail = data?.data?.email;
   // const userRole = data?.data?.role;
@@ -51,7 +51,6 @@ export function DepositMoneyForm({
 
     try {
       const res = await depositMoney(depositMoneyData).unwrap();
-   
 
       if (res.success) {
         toast.success(`${data.amount} Taka Deposit Successfully`, {
@@ -66,6 +65,10 @@ export function DepositMoneyForm({
       toast.error("Something Went Wrong", { id: toastId });
     }
   };
+
+  if (isLoading) {
+    return <DashBoardLoader />;
+  }
 
   return (
     <div

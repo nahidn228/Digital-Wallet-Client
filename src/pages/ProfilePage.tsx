@@ -31,13 +31,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 import { toast } from "sonner";
 import { useUpdateUserInfoMutation } from "@/redux/features/user/user.api";
 
 import { ChangePassword } from "@/components/modules/ChangePassword";
+import { DashBoardLoader } from "@/components/ui/DashBoardLoader";
+import { Loader } from "@/components/ui/Loader";
 
 // Define the validation schema with proper optional fields
 // const updateProfileSchema = z.object({
@@ -62,8 +63,9 @@ export default function ProfilePage() {
   // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [isEditing, setIsEditing] = useState(false);
-  const { data } = useUserInfoQuery(undefined);
-  const [updateUser] = useUpdateUserInfoMutation();
+  const { data, isLoading } = useUserInfoQuery(undefined);
+  const [updateUser, { isLoading: updateLoading }] =
+    useUpdateUserInfoMutation();
   const userInfo = data?.data;
 
   const form = useForm({
@@ -113,6 +115,13 @@ export default function ProfilePage() {
       });
     }
   }, [form, userInfo]);
+
+  if (isLoading) {
+    return <DashBoardLoader />;
+  }
+  if (updateLoading) {
+    return <Loader />;
+  }
 
   // Handle cancel editing
   const handleCancel = () => {

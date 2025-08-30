@@ -34,6 +34,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
+import { DashBoardLoader } from "@/components/ui/DashBoardLoader";
 
 interface IUser {
   _id: string;
@@ -52,7 +53,7 @@ const AllUser = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState("");
 
-  const { data, refetch } = useGetAllUserQuery({
+  const { data, refetch, isLoading } = useGetAllUserQuery({
     page,
     limit: 5,
     role: filterType === "all" ? null : filterType,
@@ -100,6 +101,9 @@ const AllUser = () => {
     setPage(1);
     refetch();
   }, [filterType, refetch]);
+  if (isLoading) {
+    return <DashBoardLoader />;
+  }
 
   return (
     <section className="">
