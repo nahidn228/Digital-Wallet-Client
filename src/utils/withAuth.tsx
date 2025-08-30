@@ -1,3 +1,4 @@
+import { Loader } from "@/components/ui/Loader";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import type { TRole } from "@/types";
 
@@ -10,7 +11,7 @@ export const withAuth = (Component: ComponentType, requiredRole?: TRole[]) => {
     console.log(data);
 
     if (isLoading) {
-      return <div>Loading...</div>;
+      return <Loader />;
     }
 
     if (!isLoading && !data?.data?.email) {

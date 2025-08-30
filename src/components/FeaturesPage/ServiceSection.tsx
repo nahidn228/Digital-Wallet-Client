@@ -65,9 +65,9 @@ const ServiceSection = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="border-border space-y-6 rounded-lg border p-8 transition-shadow hover:shadow-sm"
+                className="border-border space-y-6 rounded-lg border p-8   transition-transform transform duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 ">
                   <div className="bg-muted rounded-full p-3">
                     {service.icon}
                   </div>

@@ -5,7 +5,7 @@ import dollarImage from "@/assets/image/doller.jpg";
 import WhyWork from "../HomePage/WhyWork";
 import WhyChoose from "../HomePage/WhyChoose";
 import TeamSection from "./TeamSection";
-
+import CountUp from "react-countup";
 interface About3Props {
   title?: string;
   description?: string;
@@ -34,7 +34,7 @@ interface About3Props {
   achievementsDescription?: string;
   achievements?: Array<{
     label: string;
-    value: string;
+    value: number;
   }>;
 }
 
@@ -45,7 +45,7 @@ const defaultCompanies = [
   },
   {
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/company/fictional-company-logo-2.svg",
-    alt: "Descript",
+    alt: "Description",
   },
   {
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/company/fictional-company-logo-3.svg",
@@ -66,10 +66,10 @@ const defaultCompanies = [
 ];
 
 const defaultAchievements = [
-  { label: "Companies Supported", value: "300+" },
-  { label: "Projects Finalized", value: "800+" },
-  { label: "Happy Customers", value: "99%" },
-  { label: "Recognized Awards", value: "10+" },
+  { label: "Companies Supported", value: 300 },
+  { label: "Projects Finalized", value: 800 },
+  { label: "Happy Customers", value: 99 },
+  { label: "Recognized Awards", value: 10 },
 ];
 
 const AboutSection = ({
@@ -180,7 +180,12 @@ const AboutSection = ({
               <div className="flex flex-col gap-4" key={item.label + idx}>
                 <p className="text-primary/90 font-medium">{item.label}</p>
                 <span className="text-4xl font-semibold md:text-5xl">
-                  {item.value}
+                  <CountUp
+                    start={0}
+                    end={item.value}
+                    duration={2.5} // speed of animation
+                    suffix={item.label === "Happy Customers" ? "%" : "+"}
+                  />
                 </span>
               </div>
             ))}

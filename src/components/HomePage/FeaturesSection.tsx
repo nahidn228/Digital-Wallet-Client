@@ -67,10 +67,10 @@ const FeaturesSection = () => {
         <div className="mx-auto mt-20 grid  gap-10 md:grid-cols-2">
           {feature.map((feature, idx) => (
             <div
-              className="flex flex-col justify-between rounded-lg bg-accent p-6 md:min-h-[300px] md:p-8"
+              className="flex flex-col justify-between rounded-lg bg-accent p-6 md:min-h-[300px] md:p-8 transition-transform transform duration-300 hover:-translate-y-2 hover:shadow-xl"
               key={idx}
             >
-              <span className="mb-6 flex size-12 items-center justify-center rounded-full bg-background border border-b-primary">
+              <span className="mb-6 flex size-14 items-center justify-center rounded-full bg-background border border-b-primary ">
                 {feature.icon}
               </span>
               <div>

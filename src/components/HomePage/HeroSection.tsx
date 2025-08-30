@@ -79,7 +79,7 @@ const HeroSection = ({
             />
           </div>
           <img
-            className="relative z-10"
+            className="relative z-10 transition-transform transform duration-300 hover:-translate-y-2 hover:shadow-xl"
             src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/mockups/phone-2.png"
             width={450}
             height={889}

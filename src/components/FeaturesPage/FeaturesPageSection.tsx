@@ -67,7 +67,7 @@ const FeaturesPageSection = () => {
         <div className="max-w-5xl mx-auto mt-20 grid grid-cols-1 gap-8 md:grid-cols-2">
           {feature.map((feature, idx) => (
             <div
-              className="flex flex-col justify-between rounded-lg bg-accent p-6 md:min-h-[300px] md:p-8"
+              className="flex flex-col justify-between rounded-lg bg-accent p-6 md:min-h-[300px] md:p-8 transition-transform transform duration-300 hover:-translate-y-2 hover:shadow-xl"
               key={idx}
             >
               <span className="flex size-12 items-center justify-center rounded-full bg-background border border-b-primary">
