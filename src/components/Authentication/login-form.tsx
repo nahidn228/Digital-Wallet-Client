@@ -23,13 +23,11 @@ export function LoginForm({
 
   const navigate = useNavigate();
   const form = useForm();
-  
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Please wait...");
     try {
       const res = await login(data).unwrap();
- 
 
       if (res.success) {
         toast.success("Login Successfully", { id: toastId });
@@ -115,6 +113,31 @@ export function LoginForm({
                   Login
                 </Button>
 
+                {/* Quick Login Buttons */}
+                <div className="grid grid-cols-2 gap-4">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() => {
+                      form.setValue("email", "user@example.com");
+                      form.setValue("password", "user123");
+                    }}
+                  >
+                    User Login
+                  </Button>
+
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() => {
+                      form.setValue("email", "admin@example.com");
+                      form.setValue("password", "admin123");
+                    }}
+                  >
+                    Admin Login
+                  </Button>
+                </div>
+
                 {/* Divider */}
                 <div className="relative text-center text-sm">
                   <span className="bg-card px-2 text-muted-foreground relative z-10">
@@ -169,11 +192,11 @@ export function LoginForm({
           </Form>
 
           {/* Right Image */}
-          <div className="relative hidden md:block bg-muted">
+          <div className="relative hidden md:block ">
             <img
-              src="/placeholder.svg"
+              src="/DW login.png"
               alt="Login Banner"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.25] dark:grayscale"
+              className="absolute inset-0 h-full w-full object-cover "
             />
           </div>
         </CardContent>

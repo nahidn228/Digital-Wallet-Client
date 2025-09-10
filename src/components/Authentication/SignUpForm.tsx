@@ -75,7 +75,7 @@ export function SignUpForm({
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn("flex flex-col gap-6  ", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
           <Form {...form}>
@@ -262,9 +262,9 @@ export function SignUpForm({
 
           <div className="bg-muted relative hidden md:block">
             <img
-              src="/placeholder.svg"
+              src="/signup.jpg"
               alt="Background"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+              className="absolute inset-0 h-full w-full object-cover "
             />
           </div>
         </CardContent>

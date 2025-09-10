@@ -83,6 +83,7 @@ const HeroSection = ({
             src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/mockups/phone-2.png"
             width={450}
             height={889}
+            loading="lazy"
             alt="iphone"
           />
         </div>
