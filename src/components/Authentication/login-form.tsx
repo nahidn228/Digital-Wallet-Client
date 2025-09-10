@@ -120,10 +120,11 @@ export function LoginForm({
                     variant="secondary"
                     onClick={() => {
                       form.setValue("email", "user@example.com");
-                      form.setValue("password", "user123");
+                      form.setValue("password", "users123");
+                      
                     }}
                   >
-                    User Login
+                    Login as User
                   </Button>
 
                   <Button
@@ -132,9 +133,10 @@ export function LoginForm({
                     onClick={() => {
                       form.setValue("email", "admin@example.com");
                       form.setValue("password", "admin123");
+                      
                     }}
                   >
-                    Admin Login
+                   Login as Admin
                   </Button>
                 </div>
 
